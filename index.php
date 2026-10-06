@@ -1,15 +1,13 @@
 <?php
 
-require_once "app/controner/DashboardController.php";
-require_once "app/controner/SanPhamController.php";
+require_once "app/controllers/DashboardController.php";
+require_once "app/controllers/SanPhamController.php";
+require_once "app/controllers/userController.php";
 
 
 
 $modun = $_GET['modun']  ?? "" ;
 $action= $_GET['action'] ?? "" ;
-
-
-
 
 
 switch($modun):
