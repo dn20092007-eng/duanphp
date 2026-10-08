@@ -2,39 +2,70 @@
 
 class UserModel
 {
-    private $pdo;
-
-    public function __construct($pdo)
-    {
-        $this->pdo = $pdo;
-    }
+    public function __construct(private $pdo) {}
 
     public function getAll()
     {
-        $sql = "SELECT * FROM NguoiDung ORDER BY MaNguoiDung DESC";
-        $stmt = $this->pdo->query($sql);
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->pdo->query("SELECT * FROM NguoiDung ORDER BY MaNguoiDung DESC")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function create($data)
+    public function getById($id)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM NguoiDung WHERE MaNguoiDung = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function create($d)
     {
         $sql = "INSERT INTO NguoiDung
-                (TenDangNhap, MatKhau, Email, TenHienThi, VaiTro, SoDienThoai, DiaChi, NgayDangKy, TrangThai)
-                VALUES
-                (:u, :p, :e, :ht, :vt, :sdt, :dc, NOW(), :tt)";
+        (TenDangNhap,MatKhau,Email,TenHienThi,VaiTro,SoDienThoai,DiaChi,NgayDangKy,TrangThai)
+        VALUES (?,?,?,?,?,?,?,NOW(),?)";
 
-        $stmt = $this->pdo->prepare($sql);
-
-        return $stmt->execute([
-            'u' => $data['ten_dang_nhap'],
-            'p' => $data['mat_khau'],
-            'e' => $data['email'],
-            'ht' => $data['ten_hien_thi'],
-            'vt' => $data['vai_tro'],
-            'sdt' => $data['so_dien_thoai'],
-            'dc' => $data['dia_chi'],
-            'tt' => $data['trang_thai']
+        return $this->pdo->prepare($sql)->execute([
+            $d['ten_dang_nhap'],
+            $d['mat_khau'],
+            $d['email'],
+            $d['ten_hien_thi'],
+            $d['vai_tro'],
+            $d['so_dien_thoai'],
+            $d['dia_chi'],
+            $d['trang_thai']
         ]);
+    }
+
+    public function update($id, $d)
+    {
+        if ($d['mat_khau_moi']) {
+            $sql = "UPDATE NguoiDung SET Email=?,TenHienThi=?,VaiTro=?,SoDienThoai=?,DiaChi=?,TrangThai=?,MatKhau=? WHERE MaNguoiDung=?";
+            $data = [
+                $d['email'],
+                $d['ten_hien_thi'],
+                $d['vai_tro'],
+                $d['so_dien_thoai'],
+                $d['dia_chi'],
+                $d['trang_thai'],
+                $d['mat_khau_moi'],
+                $id
+            ];
+        } else {
+            $sql = "UPDATE NguoiDung SET Email=?,TenHienThi=?,VaiTro=?,SoDienThoai=?,DiaChi=?,TrangThai=? WHERE MaNguoiDung=?";
+            $data = [
+                $d['email'],
+                $d['ten_hien_thi'],
+                $d['vai_tro'],
+                $d['so_dien_thoai'],
+                $d['dia_chi'],
+                $d['trang_thai'],
+                $id
+            ];
+        }
+
+        return $this->pdo->prepare($sql)->execute($data);
+    }
+
+    public function delete($id)
+    {
+        return $this->pdo->prepare("DELETE FROM NguoiDung WHERE MaNguoiDung=?")->execute([$id]);
     }
 }

@@ -1,88 +1,54 @@
-<?php
-$pageTitle = 'Thêm Người Dùng';
-?>
+<h3>Quản lý người dùng</h3>
 
-<h3>Thêm Tài Khoản Mới</h3>
+<a href="index.php?modun=user&action=create">
+    + Thêm người dùng
+</a>
 
-<a href="index.php?controller=user&action=index">← Quay lại</a>
+<br><br>
 
-<hr>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Tên đăng nhập</th>
+        <th>Họ tên</th>
+        <th>Email</th>
+        <th>Vai trò</th>
+        <th>Số điện thoại</th>
+        <th>Trạng thái</th>
+        <th>Thao tác</th>
+    </tr>
 
-<form method="POST"
-      action="index.php?controller=user&action=store">
+    <?php foreach ($users as $user): ?>
 
-    <div class="mb-2">
-        <label>Tên Đăng Nhập</label>
-        <input type="text"
-               name="ten_dang_nhap"
-               class="form-control"
-               required>
-    </div>
+    <tr>
+        <td><?= $user['MaNguoiDung'] ?></td>
 
-    <div class="mb-2">
-        <label>Mật Khẩu</label>
-        <input type="password"
-               name="mat_khau"
-               class="form-control"
-               required>
-    </div>
+        <td><?= htmlspecialchars($user['TenDangNhap']) ?></td>
 
-    <div class="mb-2">
-        <label>Họ Tên</label>
-        <input type="text"
-               name="ten_hien_thi"
-               class="form-control"
-               required>
-    </div>
+        <td><?= htmlspecialchars($user['TenHienThi']) ?></td>
 
-    <div class="mb-2">
-        <label>Email</label>
-        <input type="email"
-               name="email"
-               class="form-control"
-               required>
-    </div>
+        <td><?= htmlspecialchars($user['Email']) ?></td>
 
-    <div class="mb-2">
-        <label>Số Điện Thoại</label>
-        <input type="text"
-               name="so_dien_thoai"
-               class="form-control">
-    </div>
+        <td><?= htmlspecialchars($user['VaiTro']) ?></td>
 
-    <div class="mb-2">
-        <label>Địa Chỉ</label>
-        <input type="text"
-               name="dia_chi"
-               class="form-control">
-    </div>
+        <td><?= htmlspecialchars($user['SoDienThoai']) ?></td>
 
-    <div class="mb-2">
-        <label>Vai Trò</label>
+        <td><?= htmlspecialchars($user['TrangThai']) ?></td>
 
-        <select name="vai_tro" class="form-control">
-            <option value="User">Khách Hàng (User)</option>
-            <option value="Staff">Nhân Viên (Staff)</option>
-            <option value="Admin">Quản Trị Viên (Admin)</option>
-        </select>
-    </div>
+        <td>
+            <a href="index.php?modun=user&action=edit&id=<?= $user['MaNguoiDung'] ?>">
+                Sửa
+            </a>
 
-    <div class="mb-2">
-        <label>Trạng Thái</label>
+            |
 
-        <select name="trang_thai" class="form-control">
-            <option value="HoatDong">Hoạt Động</option>
-            <option value="Khoa">Khóa</option>
-        </select>
-    </div>
+            <a href="index.php?modun=user&action=delete&id=<?= $user['MaNguoiDung'] ?>"
+               onclick="return confirm('Bạn có chắc muốn xóa không?')">
+                Xóa
+            </a>
+        </td>
+    </tr>
 
-    <button type="submit" class="btn btn-primary">
-        Lưu
-    </button>
+    <?php endforeach; ?>
 
-    <a href="index.php?controller=user&action=index"
-       class="btn btn-secondary">
-        Hủy
-    </a>
-
-</form>
+</table>
