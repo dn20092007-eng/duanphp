@@ -9,6 +9,12 @@
     <a href="index.php">Quay lại Trang Chủ</a>
     <hr>
 
+    <?php if (!empty($error)): ?>
+        <div style="color: red; background: #ffe6e6; padding: 10px; margin-bottom: 15px; border: 1px solid red; border-radius: 5px;">
+            <strong>⚠️ Thông báo:</strong> <?= htmlspecialchars($error) ?>
+        </div>
+    <?php endif; ?>
+
     <h3>Thêm sản phẩm mới</h3>
     <form method="POST">
         <input type="text" name="ten_sp" placeholder="Tên sản phẩm" required>

@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Chưa đăng nhập thì chuyển về login
 if (!isset($_SESSION['nguoi_dung'])) {
-    header('Location: /ban-quan-ao/login.php');
+    header('Location: login.php');
     exit();
 }
 

@@ -22,7 +22,7 @@ class LoginController
 
         // Nếu đã đăng nhập thì về trang chủ
         if (isset($_SESSION['nguoi_dung'])) {
-            header('Location: /ban-quan-ao/index.php');
+            header('Location: index.php');
             exit();
         }
 
@@ -64,7 +64,7 @@ class LoginController
                             $nd['MaNguoiDung']
                         );
 
-                        header('Location: /ban-quan-ao/index.php');
+                        header('Location: index.php');
                         exit();
                     }
                 }
