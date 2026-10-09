@@ -12,6 +12,7 @@ require_once __DIR__ . '/database/userdatabase.php';
 require_once __DIR__ . '/app/controllers/DashboardController.php';
 require_once __DIR__ . '/app/controllers/SanPhamController.php';
 require_once __DIR__ . '/app/controllers/UserController.php';
+require_once __DIR__ . '/app/controllers/DonHangController.php';
 
 $modun = $_GET['modun'] ?? '';
 $action = $_GET['action'] ?? '';
@@ -20,13 +21,15 @@ switch ($modun) {
 
     case 'sanpham':
 
-        $controller = new SanPhamController();
+        $controller = new SanPhamController($pdo);
+        $controller->index();
 
-        if ($action === 'themmoi') {
-            $controller->themmoisp();
-        } else {
-            $controller->index();
-        }
+        break;
+
+    case 'donhang':
+
+        $controller = new DonHangController($pdo);
+        $controller->index();
 
         break;
 
