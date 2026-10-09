@@ -3,6 +3,9 @@ $pageTitle = 'Thêm Người Dùng';
 ?>
 
 <h3>Thêm Tài Khoản Mới</h3>
+<a href="index.php">
+    Quay lại 
+</a>
 
 <a href="index.php?controller=user&action=index">← Quay lại</a>
 

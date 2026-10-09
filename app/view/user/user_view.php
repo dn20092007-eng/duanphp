@@ -3,7 +3,7 @@
 <a href="index.php?modun=user&action=create">
     + Thêm người dùng
 </a>
-<a href="index.php" class="btn btn-secondary mb-3">
+<a href="index.php">
     Quay lại 
 </a>
 

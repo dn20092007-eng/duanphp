@@ -1,3 +1,8 @@
+<a href="index.php?modun=user&action=index">
+    Quay lại 
+</a>
+
+
 <form method="POST" action="index.php?modun=user&action=update">
 
     <input type="hidden" name="id" value="<?= $user['MaNguoiDung'] ?>">
