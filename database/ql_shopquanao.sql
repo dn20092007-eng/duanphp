@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS don_hang (
 
 
 
-(User: admin | Pass: 123456)
+-- (User: admin | Pass: 123456)
 INSERT INTO NguoiDung (TenDangNhap, MatKhau, Email, TenHienThi, VaiTro, TrangThai) VALUES
 ('admin', '123456', 'admin@gmail.com', 'Quản trị viên', 'admin', 1);
 
