@@ -1,3 +1,4 @@
+
 <?php
 
 $host = 'localhost';
@@ -13,7 +14,7 @@ try {
     );
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    die("Kết nối thất bại: " . $e->getMessage());
+    exit('Lỗi kết nối database: ' . $e->getMessage());
 }

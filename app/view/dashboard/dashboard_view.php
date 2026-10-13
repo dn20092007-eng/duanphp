@@ -17,7 +17,7 @@ $laAdminHoacStaff = in_array($nd['VaiTro'], ['Admin', 'Staff']);
 <div class="d-flex justify-content-between align-items-center mb-2">
     <nav>
         <?php if ($laAdminHoacStaff): ?>
-            <a href="index.php">Báo Cáo Doanh Thu</a> |
+            <a href="index.php">Báo Cáo Doanh Thu</a>
         <?php endif; ?>
 
         <a href="index.php?modun=sanpham&action=index">Sản Phẩm</a>
