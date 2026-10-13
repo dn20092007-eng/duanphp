@@ -30,8 +30,9 @@ $pageTitle = 'Thêm Người Dùng';
                 ← Quay lại
             </a>
 
-            <form method="POST"
-                  action="index.php?controller=user&action=store">
+            
+<form method="POST"
+      action="index.php?modun=user&action=store">
 
                 <div class="row">
 
@@ -96,11 +97,10 @@ $pageTitle = 'Thêm Người Dùng';
                     Lưu tài khoản
                 </button>
 
-                <a href="index.php?controller=user&action=index"
+               <a href="index.php?modun=user&action=index"
                    class="btn btn-secondary">
                     Hủy
                 </a>
-
             </form>
         </div>
     </div>
