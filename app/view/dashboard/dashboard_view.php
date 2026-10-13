@@ -25,7 +25,7 @@ $vaiTro = $nd['VaiTro'] ?? 'User';
     <div class="container">
 
         <a class="navbar-brand fw-bold" href="index.php">
-            NHOM5<span class="text-warning">SHOP</span>
+            NHÓM 5 <span class="text-warning">SHOP</span>
         </a>
 
         <button class="navbar-toggler"
