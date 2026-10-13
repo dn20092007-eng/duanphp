@@ -1,43 +1,113 @@
 
 <?php
-$nd = $_SESSION['nguoi_dung'];
-$laAdmin = ($nd['VaiTro'] === 'Admin');
-$laAdminHoacStaff = in_array($nd['VaiTro'], ['Admin', 'Staff']);
+require_once dirname(__DIR__, 2) . '/controllers/User_AuthController.php';
+
+$nd = nguoiDungHienTai() ?? [];
+$tenHienThi = $nd['TenHienThi'] ?? 'Người dùng';
+$vaiTro = $nd['VaiTro'] ?? 'User';
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="utf-8">
-    <title><?= $pageTitle ?? 'Shop Quần Áo' ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title><?= htmlspecialchars($pageTitle ?? 'Shop Quần Áo', ENT_QUOTES, 'UTF-8') ?></title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 </head>
+
 <body>
-<div class="container mt-3">
 
-<div class="d-flex justify-content-between align-items-center mb-2">
-    <nav>
-        <?php if ($laAdminHoacStaff): ?>
-            <a href="index.php">Báo Cáo Doanh Thu</a>
-        <?php endif; ?>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
 
-        <a href="index.php?modun=sanpham&action=index">Sản Phẩm</a>
+        <a class="navbar-brand fw-bold" href="index.php">
+            NHOM5<span class="text-warning">SHOP</span>
+        </a>
 
-        <a href="index.php?modun=donhang&action=index">| Đơn Hàng</a>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menuShop"
+                aria-controls="menuShop"
+                aria-expanded="false"
+                aria-label="Mở menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <?php if ($laAdmin): ?>
-            | <a href="index.php?modun=user&action=index">Người Dùng</a>
-        <?php endif; ?>
-    </nav>
+        <div class="collapse navbar-collapse" id="menuShop">
 
-    <div>
-        Xin chào, <strong><?= htmlspecialchars($nd['TenHienThi']) ?></strong>
-        (<?= $nd['VaiTro'] ?>)
-        | <a href="logout.php">Đăng Xuất</a>
+            <ul class="navbar-nav me-auto ms-lg-4">
+
+                <?php if (laAdminHoacStaff()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Báo cáo doanh thu</a>
+                    </li>
+                <?php endif; ?>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="index.php?modun=sanpham&action=index">
+                        Sản phẩm
+                    </a>
+                </li>
+
+                <?php if (laAdminHoacStaff()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="index.php?modun=donhang&action=index">
+                            Đơn hàng
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (laAdmin()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="index.php?modun=user&action=index">
+                            Người dùng
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+            </ul>
+
+            <div class="d-flex align-items-center gap-3 flex-wrap text-white">
+
+                <div>
+                    Xin chào,
+                    <strong>
+                        <?= htmlspecialchars($tenHienThi, ENT_QUOTES, 'UTF-8') ?>
+                    </strong>
+
+                    <span class="badge bg-warning text-dark">
+                        <?= htmlspecialchars($vaiTro, ENT_QUOTES, 'UTF-8') ?>
+                    </span>
+                </div>
+
+                <a class="btn btn-outline-danger btn-sm"
+                   href="index.php?modun=auth&action=logout">
+                    Đăng xuất
+                </a>
+
+            </div>
+
+        </div>
     </div>
-</div>
-<hr>
+</nav>
 
-</div>
+<main class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title">Chào mừng đến với Nhóm 5</h2>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
-
