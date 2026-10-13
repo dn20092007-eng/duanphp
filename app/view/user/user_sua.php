@@ -15,7 +15,7 @@
 
             <a href="index.php?modun=user&action=index"
                class="btn btn-secondary mb-3">
-                ← Quay lại
+                Quay lại
             </a>
 
             <form method="POST"
